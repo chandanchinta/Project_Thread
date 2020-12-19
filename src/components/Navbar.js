@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import React,{useState} from 'react';
+import {Link} from 'react-router-dom';
 import { Button } from './Button';
 import './Navbar.css';
 
@@ -32,7 +32,7 @@ function Navbar(){
                     </div>
                     <ul className={click ? 'nav-menu active': 'nav-menu'}>
                         <li className ='nav-item'>
-                            <Link to = '/' className='nav-links' onClick={closeMenu}>
+                            <Link to = '/Login' className='nav-links' onClick={closeMenu}>
                                 Login
                             </Link>
                         </li>
