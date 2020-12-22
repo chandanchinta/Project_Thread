@@ -1,32 +1,49 @@
-import React from 'react';
-import Shirt1 from "D:/React_app/project-thread/src/components/Pages/Shop/Images/Shirt1.jpg";
-import Shirt2 from "D:/React_app/project-thread/src/components/Pages/Shop/Images/Shirt2.jfif";
-import Shirt3 from "D:/React_app/project-thread/src/components/Pages/Shop/Images/Shirt3.jpg";
-import './Shop.css';
-import Productinfo from './data';
+import React, { useState, useEffect } from "react";
+import Shirt1 from "./Images/Shirt1.jpg";
+import Shirt2 from "./Images/Shirt2.jfif";
+import Shirt3 from "./Images/Shirt3.jpg";
+import "./Shop.css";
+import Productinfo from "./data";
+import axios from "axios";
+import { API_PRODUCT } from "../../../API_endpoints";
 
-const Products = () => {
+function Products() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(API_PRODUCT)
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
-      <div className='Product-container'>
-      <h1>Lets Shop bois</h1>
-        <div className='Product-Wrapper'>
-        {Productinfo.map((product, index) => {
-          return (
-            <div key={index} className='Product-Card'>
-              <img src={product.img} className='Product-Image'/>
-              <div className='ProductInfo'> 
-                <div className='ProductTitle'>{product.name}</div>
-                <div className='ProductDesc'>{product.desc}</div>
-                <div className='ProductPrice'>{product.price}</div>
+      <div className="Product-container">
+        <h1>Lets Shop bois</h1>
+        <div className="Product-Wrapper">
+          {products.map((product, index) => {
+            return (
+              <div key={product._id} className="Product-Card">
+                <img src={product.ImageURL} className="Product-Image" />
+                <div className="ProductInfo">
+                  <div className="ProductTitle">{product.Name}</div>
+                  <div className="ProductDesc">
+                    {product.Description ? product.Description : "placeHolder"}
+                  </div>
+                  <div className="ProductPrice">{product.BasePrice}</div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
         </div>
       </div>
     </>
   );
-};
+}
 
 export default Products;
