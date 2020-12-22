@@ -39,10 +39,7 @@ function Navbar() {
                                 Login
                             </Link>
                         </li>
-<<<<<<< HEAD
-                        <li className ='nav-item'>
-                        <Link to = '/Shop' className='nav-links' onClick={closeMenu}>
-=======
+
                         <li className="nav-item">
                             <Link
                                 to="/Register"
@@ -58,22 +55,17 @@ function Navbar() {
                                 className="nav-links"
                                 onClick={closeMenu}
                             >
->>>>>>> 3f947dea5786794df3e18c8269857a692732ba97
                                 Shop
                             </Link>
                         </li>
                     </ul>
-<<<<<<< HEAD
+
                     {button && <Button buttonStyle='btn--outline'>
                         <Link to = '/Register' className='nav-links' onClick={closeMenu}>
                                 Register
                         </Link>
                         </Button>}
-=======
-                    {button && (
-                        <Button buttonStyle="btn--outline">SIGN UP</Button>
-                    )}
->>>>>>> 3f947dea5786794df3e18c8269857a692732ba97
+
                 </div>
             </nav>
         </>
