@@ -37,17 +37,16 @@ function Navbar(){
                             </Link>
                         </li>
                         <li className ='nav-item'>
-                        <Link to = '/Register' className='nav-links' onClick={closeMenu}>
-                                Register
-                            </Link>
-                        </li>
-                        <li className ='nav-item'>
                         <Link to = '/Shop' className='nav-links' onClick={closeMenu}>
                                 Shop
                             </Link>
                         </li>
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+                    {button && <Button buttonStyle='btn--outline'>
+                        <Link to = '/Register' className='nav-links' onClick={closeMenu}>
+                                Register
+                        </Link>
+                        </Button>}
                 </div>
             </nav>
         </>

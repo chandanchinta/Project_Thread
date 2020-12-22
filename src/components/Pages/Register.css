@@ -1,0 +1,29 @@
+@media all and (min-width: 480px) {
+    .Register {
+      padding: 60px 0;
+      background: #0987db;
+            
+    }
+  
+    .Register form {
+      margin:  auto;
+      max-width: 320px;
+      
+    }
+  }
+
+  .Register-item{
+      padding-right: 30px;
+  }
+
+  .Register-item2{
+    padding-right: 12px;
+}
+
+.Register-btn{
+    display: block;
+    text-align: left;
+    margin: 2rem auto;
+    glyph-orientation-horizontal: inherit;
+
+}
