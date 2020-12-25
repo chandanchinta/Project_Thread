@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Login.css";
+import "./Styles/Login.css";
 import { API_REGISTER, API_LOGIN, API_USER } from "../../API_endpoints.js";
 import axios from "axios";
 
