@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
-import { API_REGISTER, API_LOGIN } from "../../API_endpoints.js";
+import { API_REGISTER, API_LOGIN, API_USER } from "../../API_endpoints.js";
 import axios from "axios";
 
 function Login() {
@@ -15,17 +15,29 @@ function Login() {
 
   const LOGIN_request = (e) => {
     e.preventDefault();
-    axios
-      .post(API_LOGIN, {
-        userID: email,
+    axios({
+      method: "POST",
+      data: {
+        username: email,
         password: password,
+      },
+      withCredentials: true,
+      url: API_LOGIN,
+    }).then((res) => console.log(res));
+  };
+
+  const checkUser = (e) => {
+    e.preventDefault();
+    axios({
+      method: "GET",
+      withCredentials: true,
+      url: API_USER,
+    })
+      .then((res) => {
+        console.log(res.data);
       })
-      .then((payload) => {
-        console.log(payload);
-        //Route to product page
-      })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -51,6 +63,9 @@ function Login() {
         </Form.Group>
         <Button block size="lg" type="submit" disabled={!validateForm()}>
           Login
+        </Button>
+        <Button block size="lg" type="submit" onClick={checkUser}>
+          Check
         </Button>
       </Form>
     </div>
