@@ -6,6 +6,7 @@ import "./Shop.css";
 import Productinfo from "./data";
 import axios from "axios";
 import { API_PRODUCT } from "../../../API_endpoints";
+import { Card, CardColumns, Carousel } from "react-bootstrap";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -25,22 +26,34 @@ function Products() {
     <>
       <div className="Product-container">
         <h1>Lets Shop bois</h1>
-        <div className="Product-Wrapper">
+        <CardColumns>
           {products.map((product, index) => {
             return (
-              <div key={product._id} className="Product-Card">
-                <img src={product.ImageURL} className="Product-Image" />
-                <div className="ProductInfo">
-                  <div className="ProductTitle">{product.Name}</div>
-                  <div className="ProductDesc">
-                    {product.Description ? product.Description : "placeHolder"}
-                  </div>
-                  <div className="ProductPrice">{product.BasePrice}</div>
-                </div>
-              </div>
+              <Card className="bg-white text-black">
+                {/* <Card.Img src={product.ImageURL} alt="Card image" /> */}
+                <Carousel>
+                  <Carousel.Item>
+                    <img
+                      className="d-block w-100"
+                      src={product.ImageURL}
+                      alt="First slide"
+                    />
+                  </Carousel.Item>
+                </Carousel>
+
+                <Card.Title>
+                  <center>
+                    <h3>{product.Name}</h3>
+                  </center>
+                </Card.Title>
+                <Card.Body style={{ padding: "2rem" }}>
+                  <Card.Text>{product.Description}</Card.Text>
+                  <Card.Text>{product.BasePrice}</Card.Text>
+                </Card.Body>
+              </Card>
             );
           })}
-        </div>
+        </CardColumns>
       </div>
     </>
   );
