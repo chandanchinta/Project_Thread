@@ -1,75 +1,109 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "./Button";
-import "./Navbar.css";
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import LocalMallIcon from "@material-ui/icons/LocalMall";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import { Link, useHistory } from "react-router-dom";
+import UserCheck from "./utils";
 
-function Navbar() {
-    const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);
-    const handleclick = () => setClick(!click);
-    const closeMenu = () => setClick(false);
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
-    const showButton = () => {
-        if (window.innerwidth <= 960) {
-            setButton(false);
-        } else {
-            setButton(true);
-        }
-    };
+export default function Navbar() {
+  const classes = useStyles();
+  const [auth, setAuth] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const history = useHistory();
+  const [loginStatus, setLoginStatus] = useState(false);
 
-    window.addEventListener("resize", showButton);
+  useEffect(() => {
+    UserCheck().then((status) => {
+      setLoginStatus(status);
+    });
+  }, []);
 
-    return (
-        <>
-            <nav className="navbar">
-                <div className="navbar-container">
-                    <Link to="/" className="navbar-logo" onClick={closeMenu}>
-                        Project Thread
-                    </Link>
-                    <div className="menu-icon" onClick={handleclick}>
-                        <i className={click ? "fas fa-times" : "fas fa-bars"} />
-                    </div>
-                    <ul className={click ? "nav-menu active" : "nav-menu"}>
-                        <li className="nav-item">
-                            <Link
-                                to="/Login"
-                                className="nav-links"
-                                onClick={closeMenu}
-                            >
-                                Login
-                            </Link>
-                        </li>
+  const handleMenu = async (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-                        <li className="nav-item">
-                            <Link
-                                to="/Register"
-                                className="nav-links"
-                                onClick={closeMenu}
-                            >
-                                Register
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/Shop"
-                                className="nav-links"
-                                onClick={closeMenu}
-                            >
-                                Shop
-                            </Link>
-                        </li>
-                    </ul>
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-                    {button && <Button buttonStyle='btn--outline'>
-                        <Link to = '/Register' className='nav-links' onClick={closeMenu}>
-                                Register
-                        </Link>
-                        </Button>}
+  const handleProduct = () => {
+    history.push("/shop");
+  };
 
-                </div>
-            </nav>
-        </>
-    );
+  const handleLogin = () => {};
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Project Thread
+          </Typography>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleProduct}
+            color="inherit"
+          >
+            <LocalMallIcon />
+          </IconButton>
+          {loginStatus ? (
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>LogOut</MenuItem>
+              </Menu>
+            </div>
+          ) : (
+            <Link to="/login">
+              <AccountCircle />
+            </Link>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
-
-export default Navbar;
