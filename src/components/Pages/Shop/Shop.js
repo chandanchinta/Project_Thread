@@ -2,19 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./Shop.css";
 import axios from "axios";
 import { API_PRODUCT } from "../../../API_endpoints";
-import { Card, CardColumns, Carousel } from "react-bootstrap";
+import { CardColumns } from "react-bootstrap";
 import UserCheck from "../../utils";
 import { useHistory } from "react-router-dom";
+import Item from "./Item";
 
 function Products() {
   const [products, setProducts] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
     UserCheck().then((status) => {
       console.log("login status", status);
-      setLoggedIn(status);
+      // setLoggedIn(status);
     });
     axios
       .get(API_PRODUCT)
@@ -34,27 +35,14 @@ function Products() {
           <CardColumns>
             {products.map((product, index) => {
               return (
-                <Card className="bg-white text-black">
-                  {/* <Card.Img src={product.ImageURL} alt="Card image" /> */}
-                  <Carousel>
-                    <Carousel.Item>
-                      <img
-                        className="d-block w-100"
-                        src={product.ImageURL}
-                        alt="First slide"
-                      />
-                    </Carousel.Item>
-                  </Carousel>
-                  <Card.Title>
-                    <center>
-                      <h3>{product.Name}</h3>
-                    </center>
-                  </Card.Title>
-                  <Card.Body style={{ padding: "2rem" }}>
-                    <Card.Text>{product.Description}</Card.Text>
-                    <Card.Text>{product.BasePrice}</Card.Text>
-                  </Card.Body>
-                </Card>
+                <div>
+                  <Item
+                    Name={product.Name}
+                    BasePrice={product.BasePrice}
+                    Description={product.Description}
+                    ImageURL={product.ImageURL}
+                  ></Item>
+                </div>
               );
             })}
           </CardColumns>
