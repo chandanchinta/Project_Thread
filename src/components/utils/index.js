@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
-import { API_AUTH, API_CHECK } from "../../API_endpoints";
+import { API_AUTH, API_CHECK, API_GET_ID } from "../../API_endpoints";
 
-const UserCheck = async () => {
+export const UserCheck = async () => {
   const res = await axios({
     method: "GET",
     withCredentials: true,
@@ -13,4 +13,13 @@ const UserCheck = async () => {
   return res.data.logInStatus;
 };
 
-export default UserCheck;
+export const getUserID = async () => {
+  const res = await axios({
+    method: "GET",
+    withCredentials: true,
+    url: API_GET_ID,
+  });
+  console.log(res);
+
+  return res.data.id;
+};

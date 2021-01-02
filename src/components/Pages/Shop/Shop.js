@@ -3,7 +3,7 @@ import "./Shop.css";
 import axios from "axios";
 import { API_PRODUCT } from "../../../API_endpoints";
 import { CardColumns } from "react-bootstrap";
-import UserCheck from "../../utils";
+import { UserCheck } from "../../utils";
 import { useHistory } from "react-router-dom";
 import Item from "./Item";
 
@@ -37,6 +37,8 @@ function Products() {
               return (
                 <div>
                   <Item
+                    key={product._id}
+                    _id={product._id}
                     Name={product.Name}
                     BasePrice={product.BasePrice}
                     Description={product.Description}

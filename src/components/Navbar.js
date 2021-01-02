@@ -9,7 +9,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Link, useHistory } from "react-router-dom";
-import UserCheck from "./utils";
+import { UserCheck } from "./utils";
+import { API_LOG_OUT } from "../API_endpoints";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,6 +45,10 @@ export default function Navbar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logOut = async () => {
+    await axios.get(API_LOG_OUT, { withCredentials: true });
   };
 
   const handleProduct = () => {
@@ -93,8 +99,12 @@ export default function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>LogOut</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="Profile"> Profile </Link>
+                </MenuItem>
+                <MenuItem onClick={logOut}>
+                  <Link to="/"> LogOut </Link>
+                </MenuItem>
               </Menu>
             </div>
           ) : (

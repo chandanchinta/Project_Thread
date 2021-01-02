@@ -4,10 +4,20 @@ import Button from "react-bootstrap/Button";
 import "./Styles/Login.css";
 import { API_REGISTER, API_LOGIN, API_USER } from "../../API_endpoints.js";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { Logged } from "../utils/Redux/actions";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // const LogStatus = useSelector((state) => state.LogStatus);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(Logged);
+    // console.log(LogStatus);
+  }, []);
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
