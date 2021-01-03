@@ -8,7 +8,7 @@ export const UserCheck = async () => {
     withCredentials: true,
     url: API_AUTH,
     header: {
-      SameSite: None,
+      SameSite: "None",
     },
   });
 
