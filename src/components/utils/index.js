@@ -8,7 +8,12 @@ export const UserCheck = async () => {
     withCredentials: true,
     url: API_AUTH,
   });
-  console.log(res);
+  const res_fetch = await fetch(API_AUTH, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  console.log(res, res_fetch);
   // change the redux store state HERE
   return res.data.logInStatus;
 };
