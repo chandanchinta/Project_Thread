@@ -12,7 +12,7 @@ function Login() {
   const [password, setPassword] = useState("");
 
   // const LogStatus = useSelector((state) => state.LogStatus);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch(Logged);
