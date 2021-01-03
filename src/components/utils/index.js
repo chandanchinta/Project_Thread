@@ -7,10 +7,9 @@ export const UserCheck = async () => {
     method: "GET",
     withCredentials: true,
     url: API_AUTH,
-  });
-  const res_fetch = await fetch(API_AUTH, {
-    method: "GET",
-    credentials: "include",
+    header: {
+      SameSite: None,
+    },
   });
 
   console.log(res, res_fetch);
