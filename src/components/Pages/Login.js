@@ -31,7 +31,6 @@ function Login() {
         username: email,
         password: password,
       },
-      withCredentials: true,
       url: API_LOGIN,
     }).then((res) => console.log(res));
   };
